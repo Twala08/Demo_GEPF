@@ -4,7 +4,7 @@ import Start from '../Components/start';
 import Paper from '@mui/material/Paper';
 import { Divider, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 //form
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -23,11 +23,16 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { red } from '@mui/material/colors';
 
+//Alerts
+import Swal from 'sweetalert2';
+
+
 function Form2() {
     const [title, setTitle] = React.useState('');
     const [member, setMember] = React.useState('');
     const [campaign, setCampaign] = React.useState('');
     const [registration, setRegistration] = React.useState('');
+    
 
     const handleTitle = (event) => {
         setTitle(event.target.value);
@@ -44,6 +49,7 @@ function Form2() {
     const handleregistration = (event) => {
         setRegistration(event.target.value);
     };
+
 
     const required = <Typography sx={{color: red}}>*</Typography>
 
@@ -224,7 +230,7 @@ function Form2() {
             Back
         </Button>
     </Link>
-    <Link to="/signature" style={{ flex: 1,textAlign: 'right' }}>
+    <Link to={registration === 'Pre-Registration' ? '/signature' : '/Site_reg'} style={{ flex: 1,textAlign: 'right' }}>
         <Button
             variant="contained"
             sx={{
@@ -237,6 +243,7 @@ function Form2() {
                 }
             }}
             endIcon={<ArrowForwardIcon />}
+        
         >
             Next
         </Button>

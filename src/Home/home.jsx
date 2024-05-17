@@ -18,6 +18,9 @@ import FormHelperText from '@mui/material/FormHelperText';
 //forward btn
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
+//Alerts
+import Swal from 'sweetalert2';
+
 function Home() {
     const mainFormRef = useRef(null);
 
@@ -37,6 +40,52 @@ function Home() {
         setArea(event.target.value);
     };
 
+    const handleNextClick = () => {
+        if (!province && !event && !area) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Validation Error',
+                text: 'Please fill in all required fields.',
+            });
+        } else if (!province && event && !area) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Validation Error',
+                text: 'Please fill the Province and Area fields.',
+            });
+        } else if (!province && !event && area) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Validation Error',
+                text: 'Please fill the Province and Event fields.',
+            });
+        } else if (!province && event && area) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Validation Error',
+                text: 'Please fill the Province field.',
+            });
+        } else if (province && !event && area) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Validation Error',
+                text: 'Please fill the Event field.',
+            });
+        } else if (province && event && !area) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Validation Error',
+                text: 'Please fill the Area field.',
+            });
+        } else {
+            // Your code for handling the next step
+        }
+        // Change button color
+        document.querySelector('.swal2-confirm').style.backgroundColor = '#93AB4F';
+    };
+    
+    
+
     return (
         <React.Fragment>
             <AppBar />
@@ -48,7 +97,7 @@ function Home() {
                     marginTop: '5%',
                     marginLeft: '5%',
                     marginRight: '5%',
-                    marginBottom: '5%', // Added margin bottom
+                    marginBottom: '5%', 
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
@@ -81,10 +130,7 @@ function Home() {
                         value={province}
                         label="Province *"
                         onChange={handleProvince}
-                        sx={{
-                            '& .MuiSelect-root': {
-                                borderColor: 'green',
-                            }}}
+                        
                     >
                         <MenuItem value="">
                             <em>- Choose -</em>
@@ -142,7 +188,7 @@ function Home() {
                     </Select>
                     <FormHelperText>Required</FormHelperText>
                 </FormControl>
-                <Link to="/form2">
+                <Link to={province && event && area ? "/form2" : ""}>
                     <Button variant="contained" 
                     sx={{
                     backgroundColor: '#93AB4F',
@@ -151,8 +197,13 @@ function Home() {
                     marginBottom: '1rem','&:hover': {
                         backgroundColor: '#DF6E46',
                     }
+                
+                    
                     }}
-                    endIcon={<ArrowForwardIcon />}>
+                    endIcon={<ArrowForwardIcon />}
+                    onClick={handleNextClick}
+                    >
+                        
                     Next
                     </Button>
                 </Link>

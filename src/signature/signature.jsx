@@ -12,6 +12,8 @@ import SignatureCanvas from 'react-signature-canvas'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SendIcon from '@mui/icons-material/Send';
 import { BorderAll } from '@mui/icons-material';
+//Alerts
+import Swal from 'sweetalert2';
 
 function Signature() {
     const [sign, setSign] = React.useState('');
@@ -22,7 +24,7 @@ function Signature() {
     const handleSubmit = () => {
         setUrl(sign.getTrimmedCanvas().toDataURL());
     }
-
+    
     return (
         <React.Fragment>
             <AppBar />
@@ -46,8 +48,8 @@ function Signature() {
                     E-signature Pre-signature
                 </Typography>
 
-                <div style={{ position: 'relative', marginTop: '1rem' }}>
-                    <div style={{ border: 'solid black 2px', width: 500, height: 200, position: 'relative' }}>
+                <div style={{ position: 'relative', marginTop: '1rem', width: '50%' }}>
+                    <div style={{ border: 'solid black 2px', width: '100%', height: 200, position: 'relative' }}>
                         <SignatureCanvas
                             penColor='green'
                             canvasProps={{ width: 500, height: 200, className: 'sigCanvas' }}

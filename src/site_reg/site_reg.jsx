@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 //form
 import ReactDOM from 'react-dom'
+import TextField from '@mui/material/TextField';
 import SignatureCanvas from 'react-signature-canvas'
 //forward and back btns
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -43,11 +44,11 @@ function Signature() {
             >
 
                 <Typography sx={{ marginTop: '5%' }} gutterBottom variant="h5" component="h1">
-                    E-signature Pre-signature
+                Ticket Section
                 </Typography>
-                <TextField id="outlined-basic" label="Ticket *" variant="outlined" sx={{ width: '50%', margin: 'auto', marginBottom: '6px', marginTop: '2%' }}/>
-                <div style={{ position: 'relative', marginTop: '1rem' }}>
-                    <div style={{ border: 'solid black 2px', width: 500, height: 200, position: 'relative' }}>
+                <TextField id="outlined-basic" label="Ticket *" variant="outlined" sx={{ width: '50%', margin: 'auto', marginBottom: '6px', marginTop: '2%' }} />
+                <div style={{ position: 'relative', marginTop: '1rem', width: '50%' }}>
+                <div style={{ border: 'solid black 2px', width:'100%', height: 200, position: 'relative' }}>
                         <SignatureCanvas
                             penColor='green'
                             canvasProps={{ width: 500, height: 200, className: 'sigCanvas' }}
