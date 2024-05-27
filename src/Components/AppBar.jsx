@@ -1,79 +1,140 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { ThemeProvider, createTheme, styled } from '@mui/material/styles';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import { styled } from '@mui/material/styles';
-import { Link } from 'react-router-dom'; 
-import logoimg from '../Images/logo GEPF.png'
+import { Link } from 'react-router-dom';
 
+const VisuallyHiddenInput = styled('input')({
+  clip: 'rect(0 0 0 0)',
+  clipPath: 'inset(50%)',
+  height: 1,
+  overflow: 'hidden',
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  whiteSpace: 'nowrap',
+  width: 1,
+});
+
+const customTheme = createTheme({
+  components: {
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#FFFFFF',
+        },
+      },
+    },
+    MuiInputBase: {
+      styleOverrides: {
+        root: {
+          '&.Mui-focused': {
+            borderColor: 'green',
+          },
+        },
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          '&.Mui-focused': {
+            color: 'green',
+          },
+        },
+      },
+    },
+    MuiFormLabel: {
+      styleOverrides: {
+        root: {
+          '&.Mui-focused': {
+            color: 'green',
+          },
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: 'green',
+          },
+        },
+      },
+    },
+    MuiRadio: {
+      styleOverrides: {
+        root: {
+          color: '#93AB4F',
+          '&.Mui-checked': {
+            color: '#93AB4F',
+          },
+        },
+      },
+    },
+    MuiCheckbox: {
+      styleOverrides: {
+        root: {
+          color: '#93AB4F',
+          '&.Mui-checked': {
+            color: '#93AB4F',
+          },
+        },
+      },
+    },
+  },
+});
 
 const AppBar = () => {
-  const [avatarAnchorEl, setAvatarAnchorEl] = useState(null);
-  const [notificationsAnchorEl, setNotificationsAnchorEl] = useState(null);
-
-  const handleAvatarMenuOpen = (event) => {
-    setAvatarAnchorEl(event.currentTarget);
-  };
-
-  const handleAvatarMenuClose = () => {
-    setAvatarAnchorEl(null);
-  };
-
-  const handleNotificationsMenuOpen = (event) => {
-    setNotificationsAnchorEl(event.currentTarget);
-  };
-
-  const handleNotificationsMenuClose = () => {
-    setNotificationsAnchorEl(null);
-  };
-
-  const VisuallyHiddenInput = styled('input')({
-    clip: 'rect(0 0 0 0)',
-    clipPath: 'inset(50%)',
-    height: 1,
-    overflow: 'hidden',
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    whiteSpace: 'nowrap',
-    width: 1,
-  });
-
   return (
-    <MuiAppBar position="fixed">
-      <Toolbar
-        sx={{
-          pr: '24px',// keep right padding when drawer closed
-          bgcolor: '#FFFFFF', 
-        }}
-      >
-        <Typography
-          component="h1"
-          variant="h6"
-          color="inherit"
-          noWrap
-          sx={{ flexGrow: 1, color: 'black' }}
+    <ThemeProvider theme={customTheme}>
+      <MuiAppBar position="fixed">
+        <Toolbar
+          sx={{
+            pr: '24px', // Keep right padding when drawer closed
+          }}
         >
-         GEPF form
-        </Typography>
-        <Link>
-        <IconButton color="inherit" onClick={handleNotificationsMenuOpen}>
-        <Button variant="contained" style={{ backgroundColor: '#93AB4F' }}>Home</Button>
-        </IconButton>
-        </Link>
-        <Link>
-        <IconButton color="inherit" onClick={handleNotificationsMenuOpen}>
-        <Button variant="contained" style={{ backgroundColor: '#93AB4F' }}>Start</Button>
-        </IconButton>
-        </Link>
-      </Toolbar>
-    </MuiAppBar>
+          <Typography
+            component="h1"
+            variant="h6"
+            color="black" // Ensure the text color is set to black for visibility
+            noWrap
+            sx={{ flexGrow: 1 }}
+          >
+            GEPF form
+          </Typography>
+          <Link to="/">
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: '#93AB4F',
+                marginRight: '2%',
+                '&:hover': {
+                  backgroundColor: '#DF6E46',
+                },
+              }}
+            >
+              Home
+            </Button>
+          </Link>
+          <Link to="/">
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: '#93AB4F',
+                marginLeft: '10%',
+                '&:hover': {
+                  backgroundColor: '#DF6E46',
+                },
+              }}
+            >
+              Start
+            </Button>
+          </Link>
+        </Toolbar>
+      </MuiAppBar>
+    </ThemeProvider>
   );
 };
 
